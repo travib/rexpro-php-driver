@@ -1,0 +1,8 @@
+/vagrant/rexpro/ext/rexpro/client.zep.c: In function ‘zim_Rexpro_Client_connectSocket’:
+/vagrant/rexpro/ext/rexpro/client.zep.c:259: error: conflicting types for ‘__errno_location’
+/usr/include/bits/errno.h:47: note: previous declaration of ‘__errno_location’ was here
+make: *** [rexpro/client.lo] Error 1
+/vagrant/rexpro/ext/rexpro/client.zep.c: In function ‘zim_Rexpro_Client_connectSocket’:
+/vagrant/rexpro/ext/rexpro/client.zep.c:259: error: conflicting types for ‘__errno_location’
+/usr/include/bits/errno.h:47: note: previous declaration of ‘__errno_location’ was here
+make: *** [rexpro/client.lo] Error 1
