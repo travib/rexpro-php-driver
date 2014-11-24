@@ -82,22 +82,11 @@ class Client
 
     private function connectSocket() -> boolean
     {
-        var errno;
-        var errorMessage;
-
-        let errno        = null;
-        let errorMessage = null;
-
-        let this->socket = stream_socket_client(
-            this->host_uri,
-            errno,
-            errorMessage,
-            ini_get("default_socket_timeout")
-        );
+        let this->socket = stream_socket_client(this->host_uri);
 
         if !this->socket
         {
-            throw new \Rexpro\Exception\Socket(errorMessage, errno);
+            throw new \Rexpro\Exception\Socket("Unable to connect to socket.");
         }
 
         return true;

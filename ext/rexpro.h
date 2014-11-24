@@ -5,5 +5,6 @@
 #define ZEPHIR_CLASS_ENTRIES_H
 
 #include "rexpro/client.zep.h"
+#include "rexpro/message.zep.h"
 
 #endif

@@ -52,7 +52,7 @@ PHP_METHOD(Rexpro_Client, __construct) {
 PHP_METHOD(Rexpro_Client, executeScript) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zend_class_entry *_0 = NULL, *_1 = NULL;
+	zephir_nts_static zend_class_entry *_0 = NULL;
 	zval *bindings = NULL;
 	zval *query_param = NULL, *graph_name_param = NULL, *bindings_param = NULL, *script, *message, *meta;
 	zval *query = NULL, *graph_name = NULL;
@@ -89,10 +89,7 @@ PHP_METHOD(Rexpro_Client, executeScript) {
 	ZEPHIR_CALL_METHOD(NULL, script, "setmeta", NULL, meta);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(message);
-	if (!_1) {
-		_1 = zend_fetch_class(SL("Rexpro\\Message"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(message, _1);
+	object_init_ex(message, rexpro_message_ce);
 	if (zephir_has_constructor(message TSRMLS_CC)) {
 		ZEPHIR_CALL_METHOD(NULL, message, "__construct", NULL);
 		zephir_check_call_status();
@@ -109,83 +106,79 @@ PHP_METHOD(Rexpro_Client, executeScript) {
 
 PHP_METHOD(Rexpro_Client, getResponse) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_6 = NULL, *_8 = NULL, *_9 = NULL, *_20 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL, *_5 = NULL, *_7 = NULL, *_8 = NULL, *_19 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zend_class_entry *_0 = NULL;
-	zval *message, *stream = NULL, *protocol_version = NULL, *serializer_type = NULL, *reserved = NULL, *message_type = NULL, *message_size = NULL, *message_body_serialized = NULL, *_1, _2 = zval_used_for_init, _4 = zval_used_for_init, *_5 = NULL, *_7 = NULL, *_10 = NULL, *_11 = NULL, *_12 = NULL, *_13 = NULL, *_14 = NULL, *_15 = NULL, *_16 = NULL, *_17 = NULL, *_18, *_19 = NULL;
+	zval *message, *stream = NULL, *protocol_version = NULL, *serializer_type = NULL, *reserved = NULL, *message_type = NULL, *message_size = NULL, *message_body_serialized = NULL, *_0, _1 = zval_used_for_init, _3 = zval_used_for_init, *_4 = NULL, *_6 = NULL, *_9 = NULL, *_10 = NULL, *_11 = NULL, *_12 = NULL, *_13 = NULL, *_14 = NULL, *_15 = NULL, *_16 = NULL, *_17, *_18 = NULL;
 
 	ZEPHIR_MM_GROW();
 
 	ZEPHIR_INIT_VAR(message);
-	if (!_0) {
-		_0 = zend_fetch_class(SL("Rexpro\\Message"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(message, _0);
+	object_init_ex(message, rexpro_message_ce);
 	if (zephir_has_constructor(message TSRMLS_CC)) {
 		ZEPHIR_CALL_METHOD(NULL, message, "__construct", NULL);
 		zephir_check_call_status();
 	}
-	_1 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
-	ZEPHIR_SINIT_VAR(_2);
-	ZVAL_LONG(&_2, 11);
-	ZEPHIR_CALL_FUNCTION(&stream, "stream_get_contents", &_3, _1, &_2);
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
+	ZEPHIR_SINIT_VAR(_1);
+	ZVAL_LONG(&_1, 11);
+	ZEPHIR_CALL_FUNCTION(&stream, "stream_get_contents", &_2, _0, &_1);
 	zephir_check_call_status();
-	ZEPHIR_SINIT_NVAR(_2);
-	ZVAL_LONG(&_2, 0);
-	ZEPHIR_SINIT_VAR(_4);
-	ZVAL_LONG(&_4, 1);
-	ZEPHIR_CALL_FUNCTION(&_5, "substr", &_6, stream, &_2, &_4);
+	ZEPHIR_SINIT_NVAR(_1);
+	ZVAL_LONG(&_1, 0);
+	ZEPHIR_SINIT_VAR(_3);
+	ZVAL_LONG(&_3, 1);
+	ZEPHIR_CALL_FUNCTION(&_4, "substr", &_5, stream, &_1, &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_7, "bin2hex", &_8, _5);
+	ZEPHIR_CALL_FUNCTION(&_6, "bin2hex", &_7, _4);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&protocol_version, "hexdec", &_9, _7);
+	ZEPHIR_CALL_FUNCTION(&protocol_version, "hexdec", &_8, _6);
 	zephir_check_call_status();
-	ZEPHIR_SINIT_NVAR(_2);
-	ZVAL_LONG(&_2, 1);
-	ZEPHIR_SINIT_NVAR(_4);
-	ZVAL_LONG(&_4, 1);
-	ZEPHIR_CALL_FUNCTION(&_10, "substr", &_6, stream, &_2, &_4);
+	ZEPHIR_SINIT_NVAR(_1);
+	ZVAL_LONG(&_1, 1);
+	ZEPHIR_SINIT_NVAR(_3);
+	ZVAL_LONG(&_3, 1);
+	ZEPHIR_CALL_FUNCTION(&_9, "substr", &_5, stream, &_1, &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_11, "bin2hex", &_8, _10);
+	ZEPHIR_CALL_FUNCTION(&_10, "bin2hex", &_7, _9);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&serializer_type, "hexdec", &_9, _11);
+	ZEPHIR_CALL_FUNCTION(&serializer_type, "hexdec", &_8, _10);
 	zephir_check_call_status();
-	ZEPHIR_SINIT_NVAR(_2);
-	ZVAL_LONG(&_2, 2);
-	ZEPHIR_SINIT_NVAR(_4);
-	ZVAL_LONG(&_4, 4);
-	ZEPHIR_CALL_FUNCTION(&_12, "substr", &_6, stream, &_2, &_4);
+	ZEPHIR_SINIT_NVAR(_1);
+	ZVAL_LONG(&_1, 2);
+	ZEPHIR_SINIT_NVAR(_3);
+	ZVAL_LONG(&_3, 4);
+	ZEPHIR_CALL_FUNCTION(&_11, "substr", &_5, stream, &_1, &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_13, "bin2hex", &_8, _12);
+	ZEPHIR_CALL_FUNCTION(&_12, "bin2hex", &_7, _11);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&reserved, "hexdec", &_9, _13);
+	ZEPHIR_CALL_FUNCTION(&reserved, "hexdec", &_8, _12);
 	zephir_check_call_status();
-	ZEPHIR_SINIT_NVAR(_2);
-	ZVAL_LONG(&_2, 6);
-	ZEPHIR_SINIT_NVAR(_4);
-	ZVAL_LONG(&_4, 1);
-	ZEPHIR_CALL_FUNCTION(&_14, "substr", &_6, stream, &_2, &_4);
+	ZEPHIR_SINIT_NVAR(_1);
+	ZVAL_LONG(&_1, 6);
+	ZEPHIR_SINIT_NVAR(_3);
+	ZVAL_LONG(&_3, 1);
+	ZEPHIR_CALL_FUNCTION(&_13, "substr", &_5, stream, &_1, &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_15, "bin2hex", &_8, _14);
+	ZEPHIR_CALL_FUNCTION(&_14, "bin2hex", &_7, _13);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&message_type, "hexdec", &_9, _15);
+	ZEPHIR_CALL_FUNCTION(&message_type, "hexdec", &_8, _14);
 	zephir_check_call_status();
-	ZEPHIR_SINIT_NVAR(_2);
-	ZVAL_LONG(&_2, 7);
-	ZEPHIR_SINIT_NVAR(_4);
-	ZVAL_LONG(&_4, 4);
-	ZEPHIR_CALL_FUNCTION(&_16, "substr", &_6, stream, &_2, &_4);
+	ZEPHIR_SINIT_NVAR(_1);
+	ZVAL_LONG(&_1, 7);
+	ZEPHIR_SINIT_NVAR(_3);
+	ZVAL_LONG(&_3, 4);
+	ZEPHIR_CALL_FUNCTION(&_15, "substr", &_5, stream, &_1, &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&_17, "bin2hex", &_8, _16);
+	ZEPHIR_CALL_FUNCTION(&_16, "bin2hex", &_7, _15);
 	zephir_check_call_status();
-	ZEPHIR_CALL_FUNCTION(&message_size, "hexdec", &_9, _17);
+	ZEPHIR_CALL_FUNCTION(&message_size, "hexdec", &_8, _16);
 	zephir_check_call_status();
-	_18 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
-	ZEPHIR_CALL_METHOD(&_19, message, "getmessagesize", NULL);
+	_17 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
+	ZEPHIR_CALL_METHOD(&_18, message, "getmessagesize", NULL);
 	zephir_check_call_status();
-	ZEPHIR_SINIT_NVAR(_2);
-	ZVAL_LONG(&_2, 11);
-	ZEPHIR_CALL_FUNCTION(&message_body_serialized, "stream_get_contents", &_3, _18, _19, &_2);
+	ZEPHIR_SINIT_NVAR(_1);
+	ZVAL_LONG(&_1, 11);
+	ZEPHIR_CALL_FUNCTION(&message_body_serialized, "stream_get_contents", &_2, _17, _18, &_1);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, message, "setprotocolversion", NULL, protocol_version);
 	zephir_check_call_status();
@@ -201,7 +194,7 @@ PHP_METHOD(Rexpro_Client, getResponse) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, message, "unpack", NULL);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(NULL, this_ptr, "destroysocket", &_20);
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "destroysocket", &_19);
 	zephir_check_call_status();
 	RETURN_CCTOR(message);
 
@@ -219,7 +212,7 @@ PHP_METHOD(Rexpro_Client, send) {
 
 
 
-	if (!(zephir_is_instance_of(message, SL("Rexpro\\Message") TSRMLS_CC))) {
+	if (!(zephir_instance_of_ev(message, rexpro_message_ce TSRMLS_CC))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'message' must be an instance of 'Rexpro\\Message'", "", 0);
 		return;
 	}
@@ -253,39 +246,32 @@ PHP_METHOD(Rexpro_Client, send) {
 
 PHP_METHOD(Rexpro_Client, connectSocket) {
 
-	zephir_nts_static zend_class_entry *_8 = NULL;
+	zephir_nts_static zend_class_entry *_5 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_5 = NULL;
-	zval *errno, *errorMessage, *_0, _1, *_2 = NULL, *_4 = NULL, *_6, *_7;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
+	zval *_0, *_1 = NULL, *_3, *_4, *_6;
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_INIT_VAR(errno);
-	ZVAL_NULL(errno);
-	ZEPHIR_INIT_VAR(errorMessage);
-	ZVAL_NULL(errorMessage);
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("host_uri"), PH_NOISY_CC);
-	ZEPHIR_SINIT_VAR(_1);
-	ZVAL_STRING(&_1, "default_socket_timeout", 0);
-	ZEPHIR_CALL_FUNCTION(&_2, "ini_get", &_3, &_1);
+	ZEPHIR_CALL_FUNCTION(&_1, "stream_socket_client", &_2, _0);
 	zephir_check_call_status();
-	Z_SET_ISREF_P(errno);
-	ZEPHIR_CALL_FUNCTION(&_4, "stream_socket_client", &_5, _0, errno, errorMessage, _2);
-	Z_UNSET_ISREF_P(errno);
-	zephir_check_call_status();
-	zephir_update_property_this(this_ptr, SL("socket"), _4 TSRMLS_CC);
-	_6 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
-	if (!(zephir_is_true(_6))) {
-		ZEPHIR_INIT_VAR(_7);
-		if (!_8) {
-			_8 = zend_fetch_class(SL("Rexpro\\Exception\\Socket"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("socket"), _1 TSRMLS_CC);
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
+	if (!(zephir_is_true(_3))) {
+		ZEPHIR_INIT_VAR(_4);
+		if (!_5) {
+			_5 = zend_fetch_class(SL("Rexpro\\Exception\\Socket"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
 		}
-		object_init_ex(_7, _8);
-		if (zephir_has_constructor(_7 TSRMLS_CC)) {
-			ZEPHIR_CALL_METHOD(NULL, _7, "__construct", NULL, errorMessage, errno);
+		object_init_ex(_4, _5);
+		if (zephir_has_constructor(_4 TSRMLS_CC)) {
+			ZEPHIR_INIT_VAR(_6);
+			ZVAL_STRING(_6, "Unable to connect to socket.", ZEPHIR_TEMP_PARAM_COPY);
+			ZEPHIR_CALL_METHOD(NULL, _4, "__construct", NULL, _6);
+			zephir_check_temp_parameter(_6);
 			zephir_check_call_status();
 		}
-		zephir_throw_exception_debug(_7, "rexpro/client.zep", 100 TSRMLS_CC);
+		zephir_throw_exception_debug(_4, "rexpro/client.zep", 89 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

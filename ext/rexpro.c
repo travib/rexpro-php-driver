@@ -27,6 +27,7 @@
 
 
 zend_class_entry *rexpro_client_ce;
+zend_class_entry *rexpro_message_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(rexpro)
 
@@ -49,6 +50,7 @@ static PHP_MINIT_FUNCTION(rexpro)
 #endif
 
 	ZEPHIR_INIT(Rexpro_Client);
+	ZEPHIR_INIT(Rexpro_Message);
 
 #if PHP_VERSION_ID < 50500
 	setlocale(LC_ALL, old_lc_all);
