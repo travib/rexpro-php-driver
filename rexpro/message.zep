@@ -25,11 +25,11 @@ class Message
         set
     };
     private message_types    = [
-        1: "Converge\Dolittle\Message\Body\Request\Session",
-        2: "Converge\Dolittle\Message\Body\Response\Session",
-        3: "Converge\Dolittle\Message\Body\Request\Script",
-        5: "Converge\Dolittle\Message\Body\Response\Script",
-        0: "Converge\Dolittle\Message\Body\Response\Error"
+        1: "Rexpro\\Message\\Body\\Request\\Session",
+        2: "Rexpro\\Message\\Body\\Response\\Session",
+        3: "Rexpro\\Message\\Body\\Request\\Script",
+        5: "Rexpro\\Message\\Body\\Response\\Script",
+        0: "Rexpro\\Message\\Body\\Response\\Error"
     ];
     private serializer_types = [
         self::SERIALIZER_TYPE_JSON,
@@ -80,7 +80,7 @@ class Message
 
     public function getMessageType()
     {
-        if (typeof this->message_type == "int") {
+        if (is_int(this->message_type)) {
             return this->message_type;
         }
 
@@ -195,13 +195,15 @@ class Message
     private function getMessageKeyFromType(<\Rexpro\Message\Body> body)
     {
         var key;
+        var class_name;
+        let class_name = get_class(body);
         let key = array_search(get_class(body), this->message_types);
 
         if key {
             return key;
         }
 
-        throw new \Rexpro\Exception("Message type not found for this instance of Message\Body");
+        throw new \Rexpro\Exception(sprintf("Message type not found for this instance of Message\Body. %s", class_name));
     }
 
     private function serializeBody()

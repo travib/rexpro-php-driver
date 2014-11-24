@@ -48,7 +48,7 @@ class Client
         let reserved                = hexdec(bin2hex(substr(stream, 2, 4)));
         let message_type            = hexdec(bin2hex(substr(stream, 6, 1)));
         let message_size            = hexdec(bin2hex(substr(stream, 7, 4)));
-        let message_body_serialized = stream_get_contents(this->socket, message->getMessageSize(), 11);
+        let message_body_serialized = stream_get_contents(this->socket, message_size, 11);
 
         message->setProtocolVersion(protocol_version);
         message->setSerializerType(serializer_type);
@@ -56,6 +56,7 @@ class Client
         message->setMessageType(message_type);
         message->setMessageSize(message_size);
         message->setMessageBodySerialized(message_body_serialized);
+
         message->unpack();
 
         this->destroySocket();

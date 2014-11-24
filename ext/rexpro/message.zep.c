@@ -134,9 +134,8 @@ PHP_METHOD(Rexpro_Message, setMessageBodySerialized) {
 
 PHP_METHOD(Rexpro_Message, setSerializerType) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_8 = NULL;
-	zephir_nts_static zend_class_entry *_4 = NULL;
-	zval *type_param = NULL, *_0, _1, *_2, *_3, _5, _6, *_7 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_7 = NULL;
+	zval *type_param = NULL, *_0, _1, *_2, *_3, _4, _5, *_6 = NULL;
 	int type, ZEPHIR_LAST_CALL_STATUS;
 
 	ZEPHIR_MM_GROW();
@@ -155,20 +154,15 @@ PHP_METHOD(Rexpro_Message, setSerializerType) {
 		RETURN_THIS();
 	}
 	ZEPHIR_INIT_VAR(_3);
-	if (!_4) {
-		_4 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(_3, _4);
-	if (zephir_has_constructor(_3 TSRMLS_CC)) {
-		ZEPHIR_SINIT_VAR(_5);
-		ZVAL_STRING(&_5, "%s is not a valid type", 0);
-		ZEPHIR_SINIT_VAR(_6);
-		ZVAL_LONG(&_6, type);
-		ZEPHIR_CALL_FUNCTION(&_7, "sprintf", &_8, &_5, &_6);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, _7);
-		zephir_check_call_status();
-	}
+	object_init_ex(_3, rexpro_exception_ce);
+	ZEPHIR_SINIT_VAR(_4);
+	ZVAL_STRING(&_4, "%s is not a valid type", 0);
+	ZEPHIR_SINIT_VAR(_5);
+	ZVAL_LONG(&_5, type);
+	ZEPHIR_CALL_FUNCTION(&_6, "sprintf", &_7, &_4, &_5);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, _6);
+	zephir_check_call_status();
 	zephir_throw_exception_debug(_3, "rexpro/message.zep", 47 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
@@ -213,9 +207,8 @@ PHP_METHOD(Rexpro_Message, getMessageSize) {
 PHP_METHOD(Rexpro_Message, setMessageType) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_5 = NULL;
-	zephir_nts_static zend_class_entry *_2 = NULL;
-	zval *type, *_0, *_1, _3, *_4 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
+	zval *type, *_0, *_1, _2, *_3 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &type);
@@ -228,18 +221,13 @@ PHP_METHOD(Rexpro_Message, setMessageType) {
 		RETURN_THIS();
 	}
 	ZEPHIR_INIT_VAR(_1);
-	if (!_2) {
-		_2 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(_1, _2);
-	if (zephir_has_constructor(_1 TSRMLS_CC)) {
-		ZEPHIR_SINIT_VAR(_3);
-		ZVAL_STRING(&_3, "%s is not a valid type", 0);
-		ZEPHIR_CALL_FUNCTION(&_4, "sprintf", &_5, &_3, type);
-		zephir_check_call_status();
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _4);
-		zephir_check_call_status();
-	}
+	object_init_ex(_1, rexpro_exception_ce);
+	ZEPHIR_SINIT_VAR(_2);
+	ZVAL_STRING(&_2, "%s is not a valid type", 0);
+	ZEPHIR_CALL_FUNCTION(&_3, "sprintf", &_4, &_2, type);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _3);
+	zephir_check_call_status();
 	zephir_throw_exception_debug(_1, "rexpro/message.zep", 77 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
@@ -248,23 +236,24 @@ PHP_METHOD(Rexpro_Message, setMessageType) {
 
 PHP_METHOD(Rexpro_Message, getMessageType) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_4 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0, *_1, *_2 = NULL, *_3;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL, *_6 = NULL;
+	zval *_0, *_1 = NULL, *_3, *_4 = NULL, *_5;
 
 	ZEPHIR_MM_GROW();
 
-	ZEPHIR_OBS_VAR(_0);
-	zephir_read_property_this(&_0, this_ptr, SL("message_type"), PH_NOISY_CC);
-	if (Z_TYPE_P(_0) == IS_LONG) {
+	_0 = zephir_fetch_nproperty_this(this_ptr, SL("message_type"), PH_NOISY_CC);
+	ZEPHIR_CALL_FUNCTION(&_1, "is_int", &_2, _0);
+	zephir_check_call_status();
+	if (zephir_is_true(_1)) {
 		RETURN_MM_MEMBER(this_ptr, "message_type");
 	}
-	_1 = zephir_fetch_nproperty_this(this_ptr, SL("messageBody"), PH_NOISY_CC);
-	if (!ZEPHIR_IS_EMPTY(_1)) {
-		_3 = zephir_fetch_nproperty_this(this_ptr, SL("messageBody"), PH_NOISY_CC);
-		ZEPHIR_CALL_METHOD(&_2, this_ptr, "getmessagekeyfromtype", &_4, _3);
+	_3 = zephir_fetch_nproperty_this(this_ptr, SL("messageBody"), PH_NOISY_CC);
+	if (!ZEPHIR_IS_EMPTY(_3)) {
+		_5 = zephir_fetch_nproperty_this(this_ptr, SL("messageBody"), PH_NOISY_CC);
+		ZEPHIR_CALL_METHOD(&_4, this_ptr, "getmessagekeyfromtype", &_6, _5);
 		zephir_check_call_status();
-		zephir_update_property_this(this_ptr, SL("message_type"), _2 TSRMLS_CC);
+		zephir_update_property_this(this_ptr, SL("message_type"), _4 TSRMLS_CC);
 		RETURN_MM_MEMBER(this_ptr, "message_type");
 	}
 	RETURN_MM_NULL();
@@ -359,36 +348,22 @@ PHP_METHOD(Rexpro_Message, pack) {
 
 PHP_METHOD(Rexpro_Message, unpack) {
 
-	zephir_nts_static zephir_fcall_cache_entry *_6 = NULL, *_7 = NULL;
+	zephir_nts_static zephir_fcall_cache_entry *_3 = NULL, *_4 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zend_class_entry *_2 = NULL;
-	zval *_0, *_1, *_3, *_4 = NULL, *_5 = NULL;
+	zval *_0, *_1 = NULL, *_2 = NULL;
 
 	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("messageBodySerialized"), PH_NOISY_CC);
 	if (ZEPHIR_IS_EMPTY(_0)) {
-		ZEPHIR_INIT_VAR(_1);
-		if (!_2) {
-			_2 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		}
-		object_init_ex(_1, _2);
-		if (zephir_has_constructor(_1 TSRMLS_CC)) {
-			ZEPHIR_INIT_VAR(_3);
-			ZVAL_STRING(_3, "There is currently no serialized message body. Nothing to unpack.", ZEPHIR_TEMP_PARAM_COPY);
-			ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _3);
-			zephir_check_temp_parameter(_3);
-			zephir_check_call_status();
-		}
-		zephir_throw_exception_debug(_1, "rexpro/message.zep", 175 TSRMLS_CC);
-		ZEPHIR_MM_RESTORE();
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "There is currently no serialized message body. Nothing to unpack.", "rexpro/message.zep", 175);
 		return;
 	}
-	ZEPHIR_CALL_METHOD(&_5, this_ptr, "deserializebody", &_6);
+	ZEPHIR_CALL_METHOD(&_2, this_ptr, "deserializebody", &_3);
 	zephir_check_call_status();
-	ZEPHIR_CALL_METHOD(&_4, this_ptr, "getmessagetypefromkey", &_7, _5);
+	ZEPHIR_CALL_METHOD(&_1, this_ptr, "getmessagetypefromkey", &_4, _2);
 	zephir_check_call_status();
-	zephir_update_property_this(this_ptr, SL("messageBody"), _4 TSRMLS_CC);
+	zephir_update_property_this(this_ptr, SL("messageBody"), _1 TSRMLS_CC);
 	zephir_update_property_this(this_ptr, SL("messageBodySerialized"), ZEPHIR_GLOBAL(global_null) TSRMLS_CC);
 	RETURN_THIS();
 
@@ -396,10 +371,9 @@ PHP_METHOD(Rexpro_Message, unpack) {
 
 PHP_METHOD(Rexpro_Message, getMessageTypeFromKey) {
 
-	zephir_nts_static zend_class_entry *_6 = NULL;
 	zend_class_entry *_4;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *raw = NULL, *_0 = NULL, *message_type, *_1, *_2 = NULL, *_3 = NULL, *_5, *_7;
+	zval *raw = NULL, *_0 = NULL, *message_type, *_1, *_2 = NULL, *_3 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 0, 1, &raw);
@@ -426,40 +400,28 @@ PHP_METHOD(Rexpro_Message, getMessageTypeFromKey) {
 		}
 		RETURN_MM();
 	}
-	ZEPHIR_INIT_VAR(_5);
-	if (!_6) {
-		_6 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(_5, _6);
-	if (zephir_has_constructor(_5 TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(_7);
-		ZVAL_STRING(_7, "The given MessageType id doesn\"t map to a message type class.", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _5, "__construct", NULL, _7);
-		zephir_check_temp_parameter(_7);
-		zephir_check_call_status();
-	}
-	zephir_throw_exception_debug(_5, "rexpro/message.zep", 192 TSRMLS_CC);
-	ZEPHIR_MM_RESTORE();
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "The given MessageType id doesn\"t map to a message type class.", "rexpro/message.zep", 192);
 	return;
 
 }
 
 PHP_METHOD(Rexpro_Message, getMessageKeyFromType) {
 
-	zephir_nts_static zend_class_entry *_4 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL;
-	zval *body, *key = NULL, *_0, *_1, *_3, *_5;
+	zephir_nts_static zephir_fcall_cache_entry *_2 = NULL, *_6 = NULL;
+	zval *body, *key = NULL, *class_name, *_0, *_1, *_3, _4, *_5 = NULL;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &body);
 
 
 
-	if (!(zephir_is_instance_of(body, SL("Rexpro\\Message\\Body") TSRMLS_CC))) {
+	if (!(zephir_instance_of_ev(body, rexpro_message_body_ce TSRMLS_CC))) {
 		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(spl_ce_InvalidArgumentException, "Parameter 'body' must be an instance of 'Rexpro\\Message\\Body'", "", 0);
 		return;
 	}
+	ZEPHIR_INIT_VAR(class_name);
+	zephir_get_class(class_name, body, 0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_0);
 	zephir_get_class(_0, body, 0 TSRMLS_CC);
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("message_types"), PH_NOISY_CC);
@@ -469,18 +431,14 @@ PHP_METHOD(Rexpro_Message, getMessageKeyFromType) {
 		RETURN_CCTOR(key);
 	}
 	ZEPHIR_INIT_VAR(_3);
-	if (!_4) {
-		_4 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(_3, _4);
-	if (zephir_has_constructor(_3 TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(_5);
-		ZVAL_STRING(_5, "Message type not found for this instance of Message\\Body", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, _5);
-		zephir_check_temp_parameter(_5);
-		zephir_check_call_status();
-	}
-	zephir_throw_exception_debug(_3, "rexpro/message.zep", 204 TSRMLS_CC);
+	object_init_ex(_3, rexpro_exception_ce);
+	ZEPHIR_SINIT_VAR(_4);
+	ZVAL_STRING(&_4, "Message type not found for this instance of Message\\Body. %s", 0);
+	ZEPHIR_CALL_FUNCTION(&_5, "sprintf", &_6, &_4, class_name);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, _5);
+	zephir_check_call_status();
+	zephir_throw_exception_debug(_3, "rexpro/message.zep", 206 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -488,9 +446,8 @@ PHP_METHOD(Rexpro_Message, getMessageKeyFromType) {
 
 PHP_METHOD(Rexpro_Message, serializeBody) {
 
-	zephir_nts_static zend_class_entry *_5 = NULL;
 	int ZEPHIR_LAST_CALL_STATUS;
-	zval *_0, *_1 = NULL, *_2, *_3 = NULL, _4, *_6;
+	zval *_0, *_1, *_2, *_3 = NULL, _4;
 
 	ZEPHIR_MM_GROW();
 
@@ -506,83 +463,40 @@ PHP_METHOD(Rexpro_Message, serializeBody) {
 		zephir_update_property_this(this_ptr, SL("messageBodySerialized"), _1 TSRMLS_CC);
 		RETURN_THIS();
 	}
-	ZEPHIR_INIT_NVAR(_1);
-	if (!_5) {
-		_5 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(_1, _5);
-	if (zephir_has_constructor(_1 TSRMLS_CC)) {
-		ZEPHIR_INIT_VAR(_6);
-		ZVAL_STRING(_6, "Message::serializeBody() doesn't recognize the given serializer type.", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _6);
-		zephir_check_temp_parameter(_6);
-		zephir_check_call_status();
-	}
-	zephir_throw_exception_debug(_1, "rexpro/message.zep", 219 TSRMLS_CC);
-	ZEPHIR_MM_RESTORE();
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "Message::serializeBody() doesn't recognize the given serializer type.", "rexpro/message.zep", 221);
 	return;
 
 }
 
 PHP_METHOD(Rexpro_Message, deserializeBody) {
 
-	int ZEPHIR_LAST_CALL_STATUS;
-	zephir_nts_static zend_class_entry *_2 = NULL, *_7 = NULL;
-	zval *_0, *_1 = NULL, *_3 = NULL, *_4, *_5, _6;
+	zval *_0, *_1, *_2, _3;
 
-	ZEPHIR_MM_GROW();
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("messageBodySerialized"), PH_NOISY_CC);
 	if (ZEPHIR_IS_EMPTY(_0)) {
-		ZEPHIR_INIT_VAR(_1);
-		if (!_2) {
-			_2 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		}
-		object_init_ex(_1, _2);
-		if (zephir_has_constructor(_1 TSRMLS_CC)) {
-			ZEPHIR_INIT_VAR(_3);
-			ZVAL_STRING(_3, "Message::deserializeBody requires Message::_message_body_serialized to be set.", ZEPHIR_TEMP_PARAM_COPY);
-			ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _3);
-			zephir_check_temp_parameter(_3);
-			zephir_check_call_status();
-		}
-		zephir_throw_exception_debug(_1, "rexpro/message.zep", 226 TSRMLS_CC);
-		ZEPHIR_MM_RESTORE();
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(rexpro_exception_ce, "Message::deserializeBody requires Message::_message_body_serialized to be set.", "rexpro/message.zep", 228);
 		return;
 	}
-	_4 = zephir_fetch_nproperty_this(this_ptr, SL("serializerType"), PH_NOISY_CC);
-	if (ZEPHIR_IS_LONG(_4, 1)) {
-		_5 = zephir_fetch_nproperty_this(this_ptr, SL("messageBodySerialized"), PH_NOISY_CC);
-		ZEPHIR_SINIT_VAR(_6);
-		ZVAL_LONG(&_6, 256);
-		zephir_json_decode(return_value, &(return_value), _5, zephir_get_intval(ZEPHIR_GLOBAL(global_true))  TSRMLS_CC);
-		RETURN_MM();
+	_1 = zephir_fetch_nproperty_this(this_ptr, SL("serializerType"), PH_NOISY_CC);
+	if (ZEPHIR_IS_LONG(_1, 1)) {
+		_2 = zephir_fetch_nproperty_this(this_ptr, SL("messageBodySerialized"), PH_NOISY_CC);
+		ZEPHIR_SINIT_VAR(_3);
+		ZVAL_LONG(&_3, 256);
+		zephir_json_decode(return_value, &(return_value), _2, zephir_get_intval(ZEPHIR_GLOBAL(global_true))  TSRMLS_CC);
+		return;
 	}
-	ZEPHIR_INIT_NVAR(_1);
-	if (!_7) {
-		_7 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-	}
-	object_init_ex(_1, _7);
-	if (zephir_has_constructor(_1 TSRMLS_CC)) {
-		ZEPHIR_INIT_NVAR(_3);
-		ZVAL_STRING(_3, "Message::deserializeBody doesn't recognize the given serializer type.", ZEPHIR_TEMP_PARAM_COPY);
-		ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _3);
-		zephir_check_temp_parameter(_3);
-		zephir_check_call_status();
-	}
-	zephir_throw_exception_debug(_1, "rexpro/message.zep", 233 TSRMLS_CC);
-	ZEPHIR_MM_RESTORE();
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(rexpro_exception_ce, "Message::deserializeBody doesn't recognize the given serializer type.", "rexpro/message.zep", 235);
 	return;
 
 }
 
 PHP_METHOD(Rexpro_Message, convertIntTo32BitBinaryString) {
 
-	zend_bool _8;
-	zephir_nts_static zend_class_entry *_3 = NULL;
-	int ZEPHIR_LAST_CALL_STATUS, _9, _10, _14;
-	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_7 = NULL, *_12 = NULL, *_13 = NULL;
-	zval *raw_int = NULL, *_0 = NULL, *_2, *_4, _5 = zval_used_for_init, *_6 = NULL, *result, *i = NULL, _11 = zval_used_for_init;
+	zend_bool _7;
+	int ZEPHIR_LAST_CALL_STATUS, _8, _9, _13;
+	zephir_nts_static zephir_fcall_cache_entry *_1 = NULL, *_6 = NULL, *_11 = NULL, *_12 = NULL;
+	zval *raw_int = NULL, *_0 = NULL, *_2, *_3, _4 = zval_used_for_init, *_5 = NULL, *result, *i = NULL, _10 = zval_used_for_init;
 
 	ZEPHIR_MM_GROW();
 	zephir_fetch_params(1, 1, 0, &raw_int);
@@ -594,54 +508,49 @@ PHP_METHOD(Rexpro_Message, convertIntTo32BitBinaryString) {
 	zephir_check_call_status();
 	if (!zephir_is_true(_0)) {
 		ZEPHIR_INIT_VAR(_2);
-		if (!_3) {
-			_3 = zend_fetch_class(SL("Rexpro\\Exception"), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
-		}
-		object_init_ex(_2, _3);
-		if (zephir_has_constructor(_2 TSRMLS_CC)) {
-			ZEPHIR_INIT_VAR(_4);
-			zephir_gettype(_4, raw_int TSRMLS_CC);
-			ZEPHIR_SINIT_VAR(_5);
-			ZVAL_STRING(&_5, "Message::convertIntTo32BitBinaryString requires an int. %s given.", 0);
-			ZEPHIR_CALL_FUNCTION(&_6, "sprintf", &_7, &_5, _4);
-			zephir_check_call_status();
-			ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, _6);
-			zephir_check_call_status();
-		}
-		zephir_throw_exception_debug(_2, "rexpro/message.zep", 239 TSRMLS_CC);
+		object_init_ex(_2, rexpro_exception_ce);
+		ZEPHIR_INIT_VAR(_3);
+		zephir_gettype(_3, raw_int TSRMLS_CC);
+		ZEPHIR_SINIT_VAR(_4);
+		ZVAL_STRING(&_4, "Message::convertIntTo32BitBinaryString requires an int. %s given.", 0);
+		ZEPHIR_CALL_FUNCTION(&_5, "sprintf", &_6, &_4, _3);
+		zephir_check_call_status();
+		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, _5);
+		zephir_check_call_status();
+		zephir_throw_exception_debug(_2, "rexpro/message.zep", 241 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}
 	ZEPHIR_INIT_VAR(result);
 	array_init(result);
-	_10 = 3;
-	_9 = 0;
+	_9 = 3;
 	_8 = 0;
-	if (_9 <= _10) {
+	_7 = 0;
+	if (_8 <= _9) {
 		while (1) {
-			if (_8) {
-				_9++;
-				if (!(_9 <= _10)) {
+			if (_7) {
+				_8++;
+				if (!(_8 <= _9)) {
 					break;
 				}
 			} else {
-				_8 = 1;
+				_7 = 1;
 			}
 			ZEPHIR_INIT_NVAR(i);
-			ZVAL_LONG(i, _9);
-			ZEPHIR_SINIT_NVAR(_5);
-			ZVAL_STRING(&_5, "C*", 0);
-			ZEPHIR_SINIT_NVAR(_11);
-			ZVAL_LONG(&_11, ((int) (zephir_get_numberval(raw_int)) & 0xff));
-			ZEPHIR_CALL_FUNCTION(&_6, "pack", &_12, &_5, &_11);
+			ZVAL_LONG(i, _8);
+			ZEPHIR_SINIT_NVAR(_4);
+			ZVAL_STRING(&_4, "C*", 0);
+			ZEPHIR_SINIT_NVAR(_10);
+			ZVAL_LONG(&_10, ((int) (zephir_get_numberval(raw_int)) & 0xff));
+			ZEPHIR_CALL_FUNCTION(&_5, "pack", &_11, &_4, &_10);
 			zephir_check_call_status();
 			Z_SET_ISREF_P(result);
-			ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", &_13, result, _6);
+			ZEPHIR_CALL_FUNCTION(NULL, "array_unshift", &_12, result, _5);
 			Z_UNSET_ISREF_P(result);
 			zephir_check_call_status();
-			_14 = ((int) (zephir_get_numberval(raw_int)) >> 8);
+			_13 = ((int) (zephir_get_numberval(raw_int)) >> 8);
 			ZEPHIR_INIT_NVAR(raw_int);
-			ZVAL_LONG(raw_int, _14);
+			ZVAL_LONG(raw_int, _13);
 		}
 	}
 	zephir_fast_join_str(return_value, SL(""), result TSRMLS_CC);
@@ -667,11 +576,11 @@ PHP_METHOD(Rexpro_Message, __construct) {
 	zephir_update_property_this(this_ptr, SL("serializer_types"), _0 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_2);
 	array_init_size(_2, 7);
-	add_index_stringl(_2, 1, SL("Converge\Dolittle\Message\Body\Request\Session"), 1);
-	add_index_stringl(_2, 2, SL("Converge\Dolittle\Message\Body\Response\Session"), 1);
-	add_index_stringl(_2, 3, SL("Converge\Dolittle\Message\Body\Request\Script"), 1);
-	add_index_stringl(_2, 5, SL("Converge\Dolittle\Message\Body\Response\Script"), 1);
-	add_index_stringl(_2, 0, SL("Converge\Dolittle\Message\Body\Response\Error"), 1);
+	add_index_stringl(_2, 1, SL("Rexpro\\Message\\Body\\Request\\Session"), 1);
+	add_index_stringl(_2, 2, SL("Rexpro\\Message\\Body\\Response\\Session"), 1);
+	add_index_stringl(_2, 3, SL("Rexpro\\Message\\Body\\Request\\Script"), 1);
+	add_index_stringl(_2, 5, SL("Rexpro\\Message\\Body\\Response\\Script"), 1);
+	add_index_stringl(_2, 0, SL("Rexpro\\Message\\Body\\Response\\Error"), 1);
 	zephir_update_property_this(this_ptr, SL("message_types"), _2 TSRMLS_CC);
 	ZEPHIR_INIT_VAR(_3);
 	array_init_size(_3, 7);
