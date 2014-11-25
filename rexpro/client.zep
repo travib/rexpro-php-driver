@@ -30,6 +30,49 @@ class Client
         return this->getResponse();
     }
 
+    public function startSession(string username, string password, string graph_name) -> <\Rexpro\Message>
+    {
+        var session;
+        var message;
+        var meta;
+
+        let meta    = ["graphName": graph_name];
+        let session = new Message\Body\Request\Session;
+
+        session->setUsername(username);
+        session->setPassword(password);
+        session->setMeta(meta);
+
+        let message = new Message;
+        message->setMessageBody(session);
+
+        this->send(message);
+
+        return this->getResponse();
+    }
+
+     public function destroySession(string session_id, string username, string password, string graph_name)-> <\Rexpro\Message>
+     {
+        var session;
+        var message;        
+        var meta;
+        
+        let session = new Message\Body\Request\Session;
+        let meta    = ["graphName": graph_name, "killSession" : true];
+
+        session->setSession(session_id);
+        session->setUsername(username);
+        session->setPassword(password);
+        session->setMeta(meta);
+
+        let message = new Message;
+        message->setMessageBody(session);
+
+        this->send(message);
+
+        return this->getResponse();
+    }    
+
     public function getResponse() -> <\Rexpro\Message>
     {
         var message;
