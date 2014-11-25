@@ -10,7 +10,7 @@ class Client
         let this->host_uri = host_uri;
     }
 
-    public function executeScript(string query, string graph_name, array bindings = []) -> <\Rexpro\Message>
+    public function executeScript(string query, string graph_name, array bindings = [], session = null) -> <\Rexpro\Message>
     {
         var script;
         var message;
@@ -21,6 +21,10 @@ class Client
         script->setScript(query);
         script->setBindings(bindings);
         script->setMeta(meta);
+
+        if (session != null) {
+            script->setSession(session);
+        }
 
         let message = new Message;
         message->setMessageBody(script);
