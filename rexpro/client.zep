@@ -15,16 +15,20 @@ class Client
         var script;
         var message;
         var meta;
-        let meta = ["graphName": graph_name];
 
         let script = new \Rexpro\Message\Body\Request\Script;
         script->setScript(query);
         script->setBindings(bindings);
-        script->setMeta(meta);
 
         if (session != null) {
             script->setSession(session);
+            let meta = ["inSession" : true];
+
+        } else {
+            let meta = ["graphName": graph_name];            
         }
+
+        script->setMeta(meta);
 
         let message = new Message;
         message->setMessageBody(script);

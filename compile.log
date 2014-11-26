@@ -1,13 +1,13 @@
-libtool: compile:  gcc -I. -I/vagrant/rexpro/ext -DPHP_ATOM_INC -I/vagrant/rexpro/ext/include -I/vagrant/rexpro/ext/main -I/vagrant/rexpro/ext -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -DHAVE_CONFIG_H -O2 -fvisibility=hidden -Wparentheses -DZEPHIR_RELEASE=1 -c /vagrant/rexpro/ext/rexpro/client.zep.c  -fPIC -DPIC -o rexpro/.libs/client.o
+libtool: compile:  gcc -I. -I/vagrant/rexpro-php-driver/ext -DPHP_ATOM_INC -I/vagrant/rexpro-php-driver/ext/include -I/vagrant/rexpro-php-driver/ext/main -I/vagrant/rexpro-php-driver/ext -I/usr/include/php -I/usr/include/php/main -I/usr/include/php/TSRM -I/usr/include/php/Zend -I/usr/include/php/ext -I/usr/include/php/ext/date/lib -DHAVE_CONFIG_H -O2 -fvisibility=hidden -Wparentheses -DZEPHIR_RELEASE=1 -c /vagrant/rexpro-php-driver/ext/rexpro/client.zep.c  -fPIC -DPIC -o rexpro/.libs/client.o
 libtool: link: rm -fr  .libs/rexpro.la .libs/rexpro.lai .libs/rexpro.so
-libtool: link: gcc -shared  .libs/rexpro.o kernel/.libs/main.o kernel/.libs/memory.o kernel/.libs/exception.o kernel/.libs/hash.o kernel/.libs/debug.o kernel/.libs/backtrace.o kernel/.libs/object.o kernel/.libs/array.o kernel/extended/.libs/array.o kernel/.libs/string.o kernel/.libs/fcall.o kernel/.libs/require.o kernel/.libs/file.o kernel/.libs/operators.o kernel/.libs/concat.o kernel/.libs/variables.o kernel/.libs/filter.o kernel/.libs/iterator.o kernel/.libs/exit.o rexpro/.libs/client.o rexpro/.libs/exception.o rexpro/exception/.libs/socket.o rexpro/.libs/message.o rexpro/message/.libs/body.o rexpro/message/body/.libs/request.o rexpro/message/body/request/.libs/script.o rexpro/message/body/.libs/response.o rexpro/message/body/response/.libs/error.o rexpro/message/body/response/.libs/script.o      -Wl,-soname -Wl,rexpro.so -o .libs/rexpro.so
+libtool: link: gcc -shared  .libs/rexpro.o kernel/.libs/main.o kernel/.libs/memory.o kernel/.libs/exception.o kernel/.libs/hash.o kernel/.libs/debug.o kernel/.libs/backtrace.o kernel/.libs/object.o kernel/.libs/array.o kernel/extended/.libs/array.o kernel/.libs/string.o kernel/.libs/fcall.o kernel/.libs/require.o kernel/.libs/file.o kernel/.libs/operators.o kernel/.libs/concat.o kernel/.libs/variables.o kernel/.libs/filter.o kernel/.libs/iterator.o kernel/.libs/exit.o rexpro/.libs/client.o rexpro/.libs/exception.o rexpro/exception/.libs/socket.o rexpro/.libs/message.o rexpro/message/.libs/body.o rexpro/message/body/.libs/request.o rexpro/message/body/request/.libs/script.o rexpro/message/body/request/.libs/session.o rexpro/message/body/.libs/response.o rexpro/message/body/response/.libs/error.o rexpro/message/body/response/.libs/script.o rexpro/message/body/response/.libs/session.o      -Wl,-soname -Wl,rexpro.so -o .libs/rexpro.so
 libtool: link: ( cd ".libs" && rm -f "rexpro.la" && ln -s "../rexpro.la" "rexpro.la" )
-libtool: install: cp ./.libs/rexpro.so /vagrant/rexpro/ext/modules/rexpro.so
-libtool: install: cp ./.libs/rexpro.lai /vagrant/rexpro/ext/modules/rexpro.la
-libtool: finish: PATH="/usr/java/jdk1.7.0_55/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/vagrant/bin:/sbin" ldconfig -n /vagrant/rexpro/ext/modules
+libtool: install: cp ./.libs/rexpro.so /vagrant/rexpro-php-driver/ext/modules/rexpro.so
+libtool: install: cp ./.libs/rexpro.lai /vagrant/rexpro-php-driver/ext/modules/rexpro.la
+libtool: finish: PATH="/usr/local/maven/bin:/usr/java/jdk1.7.0_55/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/home/vagrant/bin:/sbin" ldconfig -n /vagrant/rexpro-php-driver/ext/modules
 ----------------------------------------------------------------------
 Libraries have been installed in:
-   /vagrant/rexpro/ext/modules
+   /vagrant/rexpro-php-driver/ext/modules
 
 If you ever happen to want to link against installed libraries
 in a given directory, LIBDIR, you must either use libtool, and

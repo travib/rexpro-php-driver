@@ -15,8 +15,8 @@
 #include "kernel/object.h"
 #include "kernel/operators.h"
 #include "kernel/memory.h"
-#include "kernel/array.h"
 #include "kernel/fcall.h"
+#include "kernel/array.h"
 #include "kernel/exception.h"
 #include "kernel/file.h"
 
@@ -53,11 +53,11 @@ PHP_METHOD(Rexpro_Client, executeScript) {
 
 	int ZEPHIR_LAST_CALL_STATUS;
 	zval *bindings = NULL;
-	zval *query_param = NULL, *graph_name_param = NULL, *bindings_param = NULL, *script, *message, *meta;
+	zval *query_param = NULL, *graph_name_param = NULL, *bindings_param = NULL, *session = NULL, *script, *message, *meta;
 	zval *query = NULL, *graph_name = NULL;
 
 	ZEPHIR_MM_GROW();
-	zephir_fetch_params(1, 2, 1, &query_param, &graph_name_param, &bindings_param);
+	zephir_fetch_params(1, 2, 2, &query_param, &graph_name_param, &bindings_param, &session);
 
 	zephir_get_strval(query, query_param);
 	zephir_get_strval(graph_name, graph_name_param);
@@ -67,11 +67,11 @@ PHP_METHOD(Rexpro_Client, executeScript) {
 	} else {
 		zephir_get_arrval(bindings, bindings_param);
 	}
+	if (!session) {
+		session = ZEPHIR_GLOBAL(global_null);
+	}
 
 
-	ZEPHIR_INIT_VAR(meta);
-	array_init_size(meta, 2);
-	zephir_array_update_string(&meta, SL("graphName"), &graph_name, PH_COPY | PH_SEPARATE);
 	ZEPHIR_INIT_VAR(script);
 	object_init_ex(script, rexpro_message_body_request_script_ce);
 	ZEPHIR_CALL_METHOD(NULL, script, "__construct", NULL);
@@ -80,6 +80,16 @@ PHP_METHOD(Rexpro_Client, executeScript) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, script, "setbindings", NULL, bindings);
 	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(meta);
+	if (Z_TYPE_P(session) != IS_NULL) {
+		ZEPHIR_CALL_METHOD(NULL, script, "setsession", NULL, session);
+		zephir_check_call_status();
+		array_init_size(meta, 2);
+		zephir_array_update_string(&meta, SL("inSession"), &ZEPHIR_GLOBAL(global_true), PH_COPY | PH_SEPARATE);
+	} else {
+		array_init_size(meta, 2);
+		zephir_array_update_string(&meta, SL("graphName"), &graph_name, PH_COPY | PH_SEPARATE);
+	}
 	ZEPHIR_CALL_METHOD(NULL, script, "setmeta", NULL, meta);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(message);
@@ -89,6 +99,96 @@ PHP_METHOD(Rexpro_Client, executeScript) {
 		zephir_check_call_status();
 	}
 	ZEPHIR_CALL_METHOD(NULL, message, "setmessagebody", NULL, script);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "send", NULL, message);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "getresponse", NULL);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+PHP_METHOD(Rexpro_Client, startSession) {
+
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *username_param = NULL, *password_param = NULL, *graph_name_param = NULL, *session, *message, *meta;
+	zval *username = NULL, *password = NULL, *graph_name = NULL;
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 3, 0, &username_param, &password_param, &graph_name_param);
+
+	zephir_get_strval(username, username_param);
+	zephir_get_strval(password, password_param);
+	zephir_get_strval(graph_name, graph_name_param);
+
+
+	ZEPHIR_INIT_VAR(meta);
+	array_init_size(meta, 2);
+	zephir_array_update_string(&meta, SL("graphName"), &graph_name, PH_COPY | PH_SEPARATE);
+	ZEPHIR_INIT_VAR(session);
+	object_init_ex(session, rexpro_message_body_request_session_ce);
+	ZEPHIR_CALL_METHOD(NULL, session, "__construct", NULL);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, session, "setusername", NULL, username);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, session, "setpassword", NULL, password);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, session, "setmeta", NULL, meta);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(message);
+	object_init_ex(message, rexpro_message_ce);
+	if (zephir_has_constructor(message TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(NULL, message, "__construct", NULL);
+		zephir_check_call_status();
+	}
+	ZEPHIR_CALL_METHOD(NULL, message, "setmessagebody", NULL, session);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, this_ptr, "send", NULL, message);
+	zephir_check_call_status();
+	ZEPHIR_RETURN_CALL_METHOD(this_ptr, "getresponse", NULL);
+	zephir_check_call_status();
+	RETURN_MM();
+
+}
+
+PHP_METHOD(Rexpro_Client, destroySession) {
+
+	int ZEPHIR_LAST_CALL_STATUS;
+	zval *session_id_param = NULL, *username_param = NULL, *password_param = NULL, *graph_name_param = NULL, *session, *message, *meta;
+	zval *session_id = NULL, *username = NULL, *password = NULL, *graph_name = NULL;
+
+	ZEPHIR_MM_GROW();
+	zephir_fetch_params(1, 4, 0, &session_id_param, &username_param, &password_param, &graph_name_param);
+
+	zephir_get_strval(session_id, session_id_param);
+	zephir_get_strval(username, username_param);
+	zephir_get_strval(password, password_param);
+	zephir_get_strval(graph_name, graph_name_param);
+
+
+	ZEPHIR_INIT_VAR(session);
+	object_init_ex(session, rexpro_message_body_request_session_ce);
+	ZEPHIR_CALL_METHOD(NULL, session, "__construct", NULL);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(meta);
+	array_init_size(meta, 3);
+	zephir_array_update_string(&meta, SL("graphName"), &graph_name, PH_COPY | PH_SEPARATE);
+	zephir_array_update_string(&meta, SL("killSession"), &ZEPHIR_GLOBAL(global_true), PH_COPY | PH_SEPARATE);
+	ZEPHIR_CALL_METHOD(NULL, session, "setsession", NULL, session_id);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, session, "setusername", NULL, username);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, session, "setpassword", NULL, password);
+	zephir_check_call_status();
+	ZEPHIR_CALL_METHOD(NULL, session, "setmeta", NULL, meta);
+	zephir_check_call_status();
+	ZEPHIR_INIT_VAR(message);
+	object_init_ex(message, rexpro_message_ce);
+	if (zephir_has_constructor(message TSRMLS_CC)) {
+		ZEPHIR_CALL_METHOD(NULL, message, "__construct", NULL);
+		zephir_check_call_status();
+	}
+	ZEPHIR_CALL_METHOD(NULL, message, "setmessagebody", NULL, session);
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "send", NULL, message);
 	zephir_check_call_status();
@@ -215,7 +315,7 @@ PHP_METHOD(Rexpro_Client, send) {
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
 	zephir_fwrite(write, _1, packed TSRMLS_CC);
 	if (ZEPHIR_IS_FALSE_IDENTICAL(write)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Rexpro was not able to send your request to the server.", "rexpro/client.zep", 78);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Rexpro was not able to send your request to the server.", "rexpro/client.zep", 129);
 		return;
 	}
 	RETURN_MM_BOOL(1);
@@ -236,7 +336,7 @@ PHP_METHOD(Rexpro_Client, connectSocket) {
 	zephir_update_property_this(this_ptr, SL("socket"), _1 TSRMLS_CC);
 	_3 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
 	if (!(zephir_is_true(_3))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Unable to connect to socket.", "rexpro/client.zep", 90);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Unable to connect to socket.", "rexpro/client.zep", 141);
 		return;
 	}
 	RETURN_MM_BOOL(1);

@@ -28,13 +28,15 @@
 
 zend_class_entry *rexpro_message_body_ce;
 zend_class_entry *rexpro_message_body_response_ce;
-zend_class_entry *rexpro_exception_ce;
 zend_class_entry *rexpro_message_body_request_ce;
+zend_class_entry *rexpro_exception_ce;
 zend_class_entry *rexpro_client_ce;
 zend_class_entry *rexpro_exception_socket_ce;
 zend_class_entry *rexpro_message_body_request_script_ce;
+zend_class_entry *rexpro_message_body_request_session_ce;
 zend_class_entry *rexpro_message_body_response_error_ce;
 zend_class_entry *rexpro_message_body_response_script_ce;
+zend_class_entry *rexpro_message_body_response_session_ce;
 zend_class_entry *rexpro_message_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(rexpro)
@@ -59,14 +61,16 @@ static PHP_MINIT_FUNCTION(rexpro)
 
 	ZEPHIR_INIT(Rexpro_Message_Body);
 	ZEPHIR_INIT(Rexpro_Message_Body_Response);
-	ZEPHIR_INIT(Rexpro_Exception);
 	ZEPHIR_INIT(Rexpro_Message_Body_Request);
+	ZEPHIR_INIT(Rexpro_Exception);
 	ZEPHIR_INIT(Rexpro_Client);
 	ZEPHIR_INIT(Rexpro_Exception_Socket);
 	ZEPHIR_INIT(Rexpro_Message);
 	ZEPHIR_INIT(Rexpro_Message_Body_Request_Script);
+	ZEPHIR_INIT(Rexpro_Message_Body_Request_Session);
 	ZEPHIR_INIT(Rexpro_Message_Body_Response_Error);
 	ZEPHIR_INIT(Rexpro_Message_Body_Response_Script);
+	ZEPHIR_INIT(Rexpro_Message_Body_Response_Session);
 
 #if PHP_VERSION_ID < 50500
 	setlocale(LC_ALL, old_lc_all);
