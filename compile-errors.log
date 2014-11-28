@@ -1,4 +1,0 @@
-make: Warning: File `rexpro.la' has modification time 1.1e+02 s in the future
-make: warning:  Clock skew detected.  Your build may be incomplete.
-make: Warning: File `/vagrant/rexpro-php-driver/ext/modules/rexpro.la' has modification time 2.5e+02 s in the future
-make: warning:  Clock skew detected.  Your build may be incomplete.

@@ -106,30 +106,30 @@ PHP_METHOD(Rexpro_Message_Body_Response_Script, hydrate) {
 
 
 
-	zephir_array_fetch_long(&_0, raw, 0, PH_NOISY | PH_READONLY, "rexpro/message/body/response/script.zep", 28 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, raw, 0, PH_NOISY | PH_READONLY, "rexpro/message/body/response/Script.zep", 28 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setsession", NULL, _0);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_1, raw, 1, PH_NOISY | PH_READONLY, "rexpro/message/body/response/script.zep", 29 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, raw, 1, PH_NOISY | PH_READONLY, "rexpro/message/body/response/Script.zep", 29 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setrequest", NULL, _1);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_2, raw, 2, PH_NOISY | PH_READONLY, "rexpro/message/body/response/script.zep", 30 TSRMLS_CC);
+	zephir_array_fetch_long(&_2, raw, 2, PH_NOISY | PH_READONLY, "rexpro/message/body/response/Script.zep", 30 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setmeta", NULL, _2);
 	zephir_check_call_status();
 	ZEPHIR_INIT_VAR(_3);
-	zephir_array_fetch_long(&_4, raw, 3, PH_NOISY | PH_READONLY, "rexpro/message/body/response/script.zep", 31 TSRMLS_CC);
+	zephir_array_fetch_long(&_4, raw, 3, PH_NOISY | PH_READONLY, "rexpro/message/body/response/Script.zep", 31 TSRMLS_CC);
 	if (Z_TYPE_P(_4) == IS_ARRAY) {
 		ZEPHIR_OBS_NVAR(_3);
-		zephir_array_fetch_long(&_3, raw, 3, PH_NOISY, "rexpro/message/body/response/script.zep", 31 TSRMLS_CC);
+		zephir_array_fetch_long(&_3, raw, 3, PH_NOISY, "rexpro/message/body/response/Script.zep", 31 TSRMLS_CC);
 	} else {
 		ZEPHIR_INIT_NVAR(_3);
 		array_init_size(_3, 2);
 		ZEPHIR_OBS_VAR(_5);
-		zephir_array_fetch_long(&_5, raw, 3, PH_NOISY, "rexpro/message/body/response/script.zep", 31 TSRMLS_CC);
+		zephir_array_fetch_long(&_5, raw, 3, PH_NOISY, "rexpro/message/body/response/Script.zep", 31 TSRMLS_CC);
 		zephir_array_fast_append(_3, _5);
 	}
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setresults", NULL, _3);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_6, raw, 4, PH_NOISY | PH_READONLY, "rexpro/message/body/response/script.zep", 32 TSRMLS_CC);
+	zephir_array_fetch_long(&_6, raw, 4, PH_NOISY | PH_READONLY, "rexpro/message/body/response/Script.zep", 32 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setbindings", NULL, _6);
 	zephir_check_call_status();
 	RETURN_THIS();
