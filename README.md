@@ -180,3 +180,11 @@ Contributing
 - Install Zephir http://zephir-lang.com/install.html
 - Edit files in `rexpro` directory
 - Put in Pull Request
+
+Todo
+----
+
+[] Add Tests
+[] Add TinkerPop3 Support
+[] Improve Documentation
+[] Get PECL support
