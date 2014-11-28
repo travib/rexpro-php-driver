@@ -1,0 +1,15 @@
+ARG_ENABLE("rexpro", "enable rexpro", "no");
+
+if (PHP_REXPRO != "no") {
+  EXTENSION("rexpro", "rexpro.c", null, "-I"+configure_module_dirname);
+  ADD_SOURCES(configure_module_dirname + "/kernel", "main.c memory.c exception.c hash.c debug.c backtrace.c object.c array.c string.c fcall.c require.c file.c operators.c concat.c variables.c filter.c iterator.c exit.c", "rexpro");
+  ADD_SOURCES(configure_module_dirname + "/kernel/extended", "array.c", "rexpro");
+  
+  ADD_SOURCES(configure_module_dirname + "/rexpro", "client.zep.c exception.zep.c message.zep.c", "rexpro");
+	ADD_SOURCES(configure_module_dirname + "/rexpro/exception", "socket.zep.c", "rexpro");
+	ADD_SOURCES(configure_module_dirname + "/rexpro/message", "body.zep.c", "rexpro");
+	ADD_SOURCES(configure_module_dirname + "/rexpro/message/body", "request.zep.c response.zep.c", "rexpro");
+	ADD_SOURCES(configure_module_dirname + "/rexpro/message/body/request", "script.zep.c session.zep.c", "rexpro");
+	ADD_SOURCES(configure_module_dirname + "/rexpro/message/body/response", "error.zep.c script.zep.c session.zep.c", "rexpro");
+  ADD_FLAG("CFLAGS_REXPRO", "/D ZEPHIR_RELEASE");
+}
