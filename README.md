@@ -184,7 +184,7 @@ Contributing
 Todo
 ----
 
-- [] Add Tests
-- [] Add TinkerPop3 Support
-- [] Improve Documentation
-- [] Get PECL support
+- [ ] Add Tests
+- [ ] Add TinkerPop3 Support
+- [ ] Improve Documentation
+- [ ] Get PECL support
