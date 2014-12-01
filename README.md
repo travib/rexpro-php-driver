@@ -11,7 +11,7 @@ from the root directory:
 - ```cd ext```
 - ```make clean```
 - ```phpize --clean```
-- ```phize```
+- ```phpize```
 - ```./configure --enable-rexpro```
 - ```make```
 - ```make install```
