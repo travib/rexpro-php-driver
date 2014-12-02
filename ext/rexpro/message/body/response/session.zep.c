@@ -18,6 +18,24 @@
 #include "kernel/array.h"
 
 
+/* -*- Mode: C; tab-width: 4 -*- */
+/*
+  +----------------------------------------------------------------------+
+  | PHP Version 5                                                        |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 1997-2009 The PHP Group                                |
+  +----------------------------------------------------------------------+
+  | This source file is subject to version 3.01 of the PHP license,      |
+  | that is bundled with this package in the file LICENSE, and is        |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
+  | If you did not receive a copy of the PHP license and are unable to   |
+  | obtain it through the world-wide-web, please send a note to          |
+  | license@php.net so we can mail you a copy immediately.               |
+  +----------------------------------------------------------------------+
+  | Author: Travis Black <travisb@vrazzle.com>                           |
+  +----------------------------------------------------------------------+
+*/
 ZEPHIR_INIT_CLASS(Rexpro_Message_Body_Response_Session) {
 
 	ZEPHIR_REGISTER_CLASS_EX(Rexpro\\Message\\Body\\Response, Session, rexpro, message_body_response_session, rexpro_message_body_response_ce, rexpro_message_body_response_session_method_entry, 0);
@@ -82,16 +100,16 @@ PHP_METHOD(Rexpro_Message_Body_Response_Session, hydrate) {
 
 
 
-	zephir_array_fetch_long(&_0, raw, 0, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 24 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, raw, 0, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 42 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setsession", NULL, _0);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_1, raw, 1, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 25 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, raw, 1, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 43 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setrequest", NULL, _1);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_2, raw, 2, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 26 TSRMLS_CC);
+	zephir_array_fetch_long(&_2, raw, 2, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 44 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setmeta", NULL, _2);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_3, raw, 3, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 27 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, raw, 3, PH_NOISY | PH_READONLY, "rexpro/message/body/response/session.zep", 45 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setlanguages", NULL, _3);
 	zephir_check_call_status();
 	RETURN_THIS();

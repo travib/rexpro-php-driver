@@ -22,6 +22,24 @@
 #include "kernel/operators.h"
 
 
+/* -*- Mode: C; tab-width: 4 -*- */
+/*
+  +----------------------------------------------------------------------+
+  | PHP Version 5                                                        |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 1997-2009 The PHP Group                                |
+  +----------------------------------------------------------------------+
+  | This source file is subject to version 3.01 of the PHP license,      |
+  | that is bundled with this package in the file LICENSE, and is        |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
+  | If you did not receive a copy of the PHP license and are unable to   |
+  | obtain it through the world-wide-web, please send a note to          |
+  | license@php.net so we can mail you a copy immediately.               |
+  +----------------------------------------------------------------------+
+  | Author: Travis Black <travisb@vrazzle.com>                           |
+  +----------------------------------------------------------------------+
+*/
 ZEPHIR_INIT_CLASS(Rexpro_Message_Body) {
 
 	ZEPHIR_REGISTER_CLASS(Rexpro\\Message, Body, rexpro, message_body, rexpro_message_body_method_entry, ZEND_ACC_EXPLICIT_ABSTRACT_CLASS);
@@ -99,7 +117,7 @@ PHP_METHOD(Rexpro_Message_Body, setMeta) {
 
 	ZEPHIR_INIT_VAR(invalid_keys);
 	array_init(invalid_keys);
-	zephir_is_iterable(meta, &_1, &_0, 0, 0, "rexpro/message/body.zep", 29);
+	zephir_is_iterable(meta, &_1, &_0, 0, 0, "rexpro/message/body.zep", 47);
 	for (
 	  ; zephir_hash_get_current_data_ex(_1, (void**) &_2, &_0) == SUCCESS
 	  ; zephir_hash_move_forward_ex(_1, &_0)
@@ -109,7 +127,7 @@ PHP_METHOD(Rexpro_Message_Body, setMeta) {
 		ZEPHIR_CALL_METHOD(&_3, this_ptr, "getmetaattributes", &_4);
 		zephir_check_call_status();
 		if (!zephir_fast_in_array(attribute, _3 TSRMLS_CC)) {
-			zephir_array_append(&invalid_keys, attribute, PH_SEPARATE, "rexpro/message/body.zep", 25);
+			zephir_array_append(&invalid_keys, attribute, PH_SEPARATE, "rexpro/message/body.zep", 43);
 		}
 	}
 	if (zephir_fast_count_int(invalid_keys TSRMLS_CC)) {
@@ -125,7 +143,7 @@ PHP_METHOD(Rexpro_Message_Body, setMeta) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _5, "__construct", NULL, _3);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_5, "rexpro/message/body.zep", 34 TSRMLS_CC);
+		zephir_throw_exception_debug(_5, "rexpro/message/body.zep", 52 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

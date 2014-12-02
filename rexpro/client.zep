@@ -1,3 +1,21 @@
+/* -*- Mode: C; tab-width: 4 -*- */
+/*
+  +----------------------------------------------------------------------+
+  | PHP Version 5                                                        |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 1997-2009 The PHP Group                                |
+  +----------------------------------------------------------------------+
+  | This source file is subject to version 3.01 of the PHP license,      |
+  | that is bundled with this package in the file LICENSE, and is        |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
+  | If you did not receive a copy of the PHP license and are unable to   |
+  | obtain it through the world-wide-web, please send a note to          |
+  | license@php.net so we can mail you a copy immediately.               |
+  +----------------------------------------------------------------------+
+  | Author: Travis Black <travisb@vrazzle.com>                           |
+  +----------------------------------------------------------------------+
+*/
 namespace Rexpro;
 
 class Client
@@ -25,7 +43,7 @@ class Client
             let meta = ["inSession" : true];
 
         } else {
-            let meta = ["graphName": graph_name];            
+            let meta = ["graphName": graph_name];
         }
 
         script->setMeta(meta);
@@ -62,9 +80,9 @@ class Client
      public function destroySession(string session_id, string username, string password, string graph_name)-> <\Rexpro\Message>
      {
         var session;
-        var message;        
+        var message;
         var meta;
-        
+
         let session = new Message\Body\Request\Session;
         let meta    = ["graphName": graph_name, "killSession" : true];
 
@@ -79,7 +97,7 @@ class Client
         this->send(message);
 
         return this->getResponse();
-    }    
+    }
 
     public function getResponse() -> <\Rexpro\Message>
     {

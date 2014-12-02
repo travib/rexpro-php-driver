@@ -21,6 +21,24 @@
 #include "kernel/file.h"
 
 
+/* -*- Mode: C; tab-width: 4 -*- */
+/*
+  +----------------------------------------------------------------------+
+  | PHP Version 5                                                        |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 1997-2009 The PHP Group                                |
+  +----------------------------------------------------------------------+
+  | This source file is subject to version 3.01 of the PHP license,      |
+  | that is bundled with this package in the file LICENSE, and is        |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
+  | If you did not receive a copy of the PHP license and are unable to   |
+  | obtain it through the world-wide-web, please send a note to          |
+  | license@php.net so we can mail you a copy immediately.               |
+  +----------------------------------------------------------------------+
+  | Author: Travis Black <travisb@vrazzle.com>                           |
+  +----------------------------------------------------------------------+
+*/
 ZEPHIR_INIT_CLASS(Rexpro_Client) {
 
 	ZEPHIR_REGISTER_CLASS(Rexpro, Client, rexpro, client, rexpro_client_method_entry, 0);
@@ -315,7 +333,7 @@ PHP_METHOD(Rexpro_Client, send) {
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
 	zephir_fwrite(write, _1, packed TSRMLS_CC);
 	if (ZEPHIR_IS_FALSE_IDENTICAL(write)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Rexpro was not able to send your request to the server.", "rexpro/client.zep", 129);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Rexpro was not able to send your request to the server.", "rexpro/client.zep", 147);
 		return;
 	}
 	RETURN_MM_BOOL(1);
@@ -336,7 +354,7 @@ PHP_METHOD(Rexpro_Client, connectSocket) {
 	zephir_update_property_this(this_ptr, SL("socket"), _1 TSRMLS_CC);
 	_3 = zephir_fetch_nproperty_this(this_ptr, SL("socket"), PH_NOISY_CC);
 	if (!(zephir_is_true(_3))) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Unable to connect to socket.", "rexpro/client.zep", 141);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_socket_ce, "Unable to connect to socket.", "rexpro/client.zep", 159);
 		return;
 	}
 	RETURN_MM_BOOL(1);

@@ -84,16 +84,16 @@ PHP_METHOD(Rexpro_Message_Body_Response_Error, hydrate) {
 
 
 
-	zephir_array_fetch_long(&_0, raw, 0, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 26 TSRMLS_CC);
+	zephir_array_fetch_long(&_0, raw, 0, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 44 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setsession", NULL, _0);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_1, raw, 1, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 27 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, raw, 1, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 45 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setrequest", NULL, _1);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_2, raw, 2, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 28 TSRMLS_CC);
+	zephir_array_fetch_long(&_2, raw, 2, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 46 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "setmeta", NULL, _2);
 	zephir_check_call_status();
-	zephir_array_fetch_long(&_3, raw, 3, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 29 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, raw, 3, PH_NOISY | PH_READONLY, "rexpro/message/body/response/error.zep", 47 TSRMLS_CC);
 	ZEPHIR_CALL_METHOD(NULL, this_ptr, "seterrormessage", NULL, _3);
 	zephir_check_call_status();
 	RETURN_THIS();

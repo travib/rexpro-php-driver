@@ -25,32 +25,68 @@ ZEPHIR_INIT_CLASS(Rexpro_Message) {
 
 	ZEPHIR_REGISTER_CLASS(Rexpro, Message, rexpro, message, rexpro_message_method_entry, 0);
 
+	/**
+	 * The current RexPro version
+	 */
 	zend_declare_property_long(rexpro_message_ce, SL("protocolVersion"), 1, ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * The type of serializer used in messages to Rexster
+	 */
 	zend_declare_property_long(rexpro_message_ce, SL("serializerType"), 1, ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * RexPro messages require these empty bits
+	 */
 	zend_declare_property_null(rexpro_message_ce, SL("reserved"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * ID of message type
+	 */
 	zend_declare_property_null(rexpro_message_ce, SL("message_type"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * Length of the serialized message body
+	 */
 	zend_declare_property_null(rexpro_message_ce, SL("messageSize"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * The main contents of the message
+	 */
 	zend_declare_property_null(rexpro_message_ce, SL("messageBody"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * The serialized message body (what is actually communicated to/from Rexster)
+	 */
 	zend_declare_property_null(rexpro_message_ce, SL("messageBodySerialized"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * A mapping of Rexster Message type ids to classes
+	 */
 	zend_declare_property_null(rexpro_message_ce, SL("message_types"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * All possible Rexster serializer types
+	 */
 	zend_declare_property_null(rexpro_message_ce, SL("serializer_types"), ZEND_ACC_PRIVATE TSRMLS_CC);
 
+	/**
+	 * The JSON serializer identifier for RexPro
+	 */
 	zend_declare_class_constant_long(rexpro_message_ce, SL("SERIALIZER_TYPE_JSON"), 1 TSRMLS_CC);
 
+	/**
+	 * The MsgPack serializer identifier for RexPro
+	 */
 	zend_declare_class_constant_long(rexpro_message_ce, SL("SERIALIZER_TYPE_MSGPACK"), 0 TSRMLS_CC);
 
 	return SUCCESS;
 
 }
 
+/**
+ * The current RexPro version
+ */
 PHP_METHOD(Rexpro_Message, setProtocolVersion) {
 
 	zval *protocolVersion;
@@ -63,6 +99,9 @@ PHP_METHOD(Rexpro_Message, setProtocolVersion) {
 
 }
 
+/**
+ * The current RexPro version
+ */
 PHP_METHOD(Rexpro_Message, getProtocolVersion) {
 
 
@@ -70,6 +109,9 @@ PHP_METHOD(Rexpro_Message, getProtocolVersion) {
 
 }
 
+/**
+ * The type of serializer used in messages to Rexster
+ */
 PHP_METHOD(Rexpro_Message, getSerializerType) {
 
 
@@ -77,6 +119,9 @@ PHP_METHOD(Rexpro_Message, getSerializerType) {
 
 }
 
+/**
+ * RexPro messages require these empty bits
+ */
 PHP_METHOD(Rexpro_Message, setReserved) {
 
 	zval *reserved;
@@ -89,6 +134,9 @@ PHP_METHOD(Rexpro_Message, setReserved) {
 
 }
 
+/**
+ * RexPro messages require these empty bits
+ */
 PHP_METHOD(Rexpro_Message, getReserved) {
 
 
@@ -96,6 +144,9 @@ PHP_METHOD(Rexpro_Message, getReserved) {
 
 }
 
+/**
+ * Length of the serialized message body
+ */
 PHP_METHOD(Rexpro_Message, setMessageSize) {
 
 	zval *messageSize;
@@ -108,6 +159,9 @@ PHP_METHOD(Rexpro_Message, setMessageSize) {
 
 }
 
+/**
+ * The main contents of the message
+ */
 PHP_METHOD(Rexpro_Message, setMessageBody) {
 
 	zval *messageBody;
@@ -120,6 +174,9 @@ PHP_METHOD(Rexpro_Message, setMessageBody) {
 
 }
 
+/**
+ * The serialized message body (what is actually communicated to/from Rexster)
+ */
 PHP_METHOD(Rexpro_Message, setMessageBodySerialized) {
 
 	zval *messageBodySerialized;
@@ -163,7 +220,7 @@ PHP_METHOD(Rexpro_Message, setSerializerType) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, _6);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(_3, "rexpro/message.zep", 47 TSRMLS_CC);
+	zephir_throw_exception_debug(_3, "rexpro/message.zep", 116 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -228,7 +285,7 @@ PHP_METHOD(Rexpro_Message, setMessageType) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, _1, "__construct", NULL, _3);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(_1, "rexpro/message.zep", 77 TSRMLS_CC);
+	zephir_throw_exception_debug(_1, "rexpro/message.zep", 158 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -322,13 +379,13 @@ PHP_METHOD(Rexpro_Message, pack) {
 	ZEPHIR_CALL_METHOD(&message_type, this_ptr, "getmessagetype", NULL);
 	zephir_check_call_status();
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("reserved"), PH_NOISY_CC);
-	zephir_array_fetch_long(&_1, _0, 0, PH_NOISY | PH_READONLY, "rexpro/message.zep", 154 TSRMLS_CC);
+	zephir_array_fetch_long(&_1, _0, 0, PH_NOISY | PH_READONLY, "rexpro/message.zep", 241 TSRMLS_CC);
 	_2 = zephir_fetch_nproperty_this(this_ptr, SL("reserved"), PH_NOISY_CC);
-	zephir_array_fetch_long(&_3, _2, 1, PH_NOISY | PH_READONLY, "rexpro/message.zep", 155 TSRMLS_CC);
+	zephir_array_fetch_long(&_3, _2, 1, PH_NOISY | PH_READONLY, "rexpro/message.zep", 242 TSRMLS_CC);
 	_4 = zephir_fetch_nproperty_this(this_ptr, SL("reserved"), PH_NOISY_CC);
-	zephir_array_fetch_long(&_5, _4, 2, PH_NOISY | PH_READONLY, "rexpro/message.zep", 156 TSRMLS_CC);
+	zephir_array_fetch_long(&_5, _4, 2, PH_NOISY | PH_READONLY, "rexpro/message.zep", 243 TSRMLS_CC);
 	_6 = zephir_fetch_nproperty_this(this_ptr, SL("reserved"), PH_NOISY_CC);
-	zephir_array_fetch_long(&_7, _6, 3, PH_NOISY | PH_READONLY, "rexpro/message.zep", 157 TSRMLS_CC);
+	zephir_array_fetch_long(&_7, _6, 3, PH_NOISY | PH_READONLY, "rexpro/message.zep", 244 TSRMLS_CC);
 	ZEPHIR_SINIT_VAR(_8);
 	ZVAL_STRING(&_8, "C*", 0);
 	ZEPHIR_CALL_FUNCTION(&pack, "pack", &_9, &_8, protocol_version, serializer_type, _1, _3, _5, _7, message_type);
@@ -356,7 +413,7 @@ PHP_METHOD(Rexpro_Message, unpack) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("messageBodySerialized"), PH_NOISY_CC);
 	if (ZEPHIR_IS_EMPTY(_0)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "There is currently no serialized message body. Nothing to unpack.", "rexpro/message.zep", 175);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "There is currently no serialized message body. Nothing to unpack.", "rexpro/message.zep", 262);
 		return;
 	}
 	ZEPHIR_CALL_METHOD(&_2, this_ptr, "deserializebody", &_3);
@@ -390,7 +447,7 @@ PHP_METHOD(Rexpro_Message, getMessageTypeFromKey) {
 		ZEPHIR_OBS_VAR(message_type);
 		ZEPHIR_CALL_METHOD(&_2, this_ptr, "getmessagetype", NULL);
 		zephir_check_call_status();
-		zephir_array_fetch(&message_type, _1, _2, PH_NOISY, "rexpro/message.zep", 188 TSRMLS_CC);
+		zephir_array_fetch(&message_type, _1, _2, PH_NOISY, "rexpro/message.zep", 275 TSRMLS_CC);
 		zephir_fetch_safe_class(_3, message_type);
 		_4 = zend_fetch_class(Z_STRVAL_P(_3), Z_STRLEN_P(_3), ZEND_FETCH_CLASS_AUTO TSRMLS_CC);
 		object_init_ex(return_value, _4);
@@ -400,7 +457,7 @@ PHP_METHOD(Rexpro_Message, getMessageTypeFromKey) {
 		}
 		RETURN_MM();
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "The given MessageType id doesn\"t map to a message type class.", "rexpro/message.zep", 192);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "The given MessageType id doesn\"t map to a message type class.", "rexpro/message.zep", 279);
 	return;
 
 }
@@ -438,7 +495,7 @@ PHP_METHOD(Rexpro_Message, getMessageKeyFromType) {
 	zephir_check_call_status();
 	ZEPHIR_CALL_METHOD(NULL, _3, "__construct", NULL, _5);
 	zephir_check_call_status();
-	zephir_throw_exception_debug(_3, "rexpro/message.zep", 206 TSRMLS_CC);
+	zephir_throw_exception_debug(_3, "rexpro/message.zep", 293 TSRMLS_CC);
 	ZEPHIR_MM_RESTORE();
 	return;
 
@@ -463,7 +520,7 @@ PHP_METHOD(Rexpro_Message, serializeBody) {
 		zephir_update_property_this(this_ptr, SL("messageBodySerialized"), _1 TSRMLS_CC);
 		RETURN_THIS();
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "Message::serializeBody() doesn't recognize the given serializer type.", "rexpro/message.zep", 221);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STR(rexpro_exception_ce, "Message::serializeBody() doesn't recognize the given serializer type.", "rexpro/message.zep", 308);
 	return;
 
 }
@@ -475,7 +532,7 @@ PHP_METHOD(Rexpro_Message, deserializeBody) {
 
 	_0 = zephir_fetch_nproperty_this(this_ptr, SL("messageBodySerialized"), PH_NOISY_CC);
 	if (ZEPHIR_IS_EMPTY(_0)) {
-		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(rexpro_exception_ce, "Message::deserializeBody requires Message::_message_body_serialized to be set.", "rexpro/message.zep", 228);
+		ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(rexpro_exception_ce, "Message::deserializeBody requires Message::_message_body_serialized to be set.", "rexpro/message.zep", 315);
 		return;
 	}
 	_1 = zephir_fetch_nproperty_this(this_ptr, SL("serializerType"), PH_NOISY_CC);
@@ -486,7 +543,7 @@ PHP_METHOD(Rexpro_Message, deserializeBody) {
 		zephir_json_decode(return_value, &(return_value), _2, zephir_get_intval(ZEPHIR_GLOBAL(global_true))  TSRMLS_CC);
 		return;
 	}
-	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(rexpro_exception_ce, "Message::deserializeBody doesn't recognize the given serializer type.", "rexpro/message.zep", 235);
+	ZEPHIR_THROW_EXCEPTION_DEBUG_STRW(rexpro_exception_ce, "Message::deserializeBody doesn't recognize the given serializer type.", "rexpro/message.zep", 322);
 	return;
 
 }
@@ -517,7 +574,7 @@ PHP_METHOD(Rexpro_Message, convertIntTo32BitBinaryString) {
 		zephir_check_call_status();
 		ZEPHIR_CALL_METHOD(NULL, _2, "__construct", NULL, _5);
 		zephir_check_call_status();
-		zephir_throw_exception_debug(_2, "rexpro/message.zep", 241 TSRMLS_CC);
+		zephir_throw_exception_debug(_2, "rexpro/message.zep", 328 TSRMLS_CC);
 		ZEPHIR_MM_RESTORE();
 		return;
 	}

@@ -1,29 +1,91 @@
+/* -*- Mode: C; tab-width: 4 -*- */
+/*
+  +----------------------------------------------------------------------+
+  | PHP Version 5                                                        |
+  +----------------------------------------------------------------------+
+  | Copyright (c) 1997-2009 The PHP Group                                |
+  +----------------------------------------------------------------------+
+  | This source file is subject to version 3.01 of the PHP license,      |
+  | that is bundled with this package in the file LICENSE, and is        |
+  | available through the world-wide-web at the following url:           |
+  | http://www.php.net/license/3_01.txt                                  |
+  | If you did not receive a copy of the PHP license and are unable to   |
+  | obtain it through the world-wide-web, please send a note to          |
+  | license@php.net so we can mail you a copy immediately.               |
+  +----------------------------------------------------------------------+
+  | Author: Travis Black <travisb@vrazzle.com>                           |
+  +----------------------------------------------------------------------+
+*/
 namespace Rexpro;
 
+/**
+ * Wrapper class for Binary interface to RexPro
+ *
+ * Wraps RexPro Messages in a reusable PHP Object
+ * @see https://github.com/tinkerpop/rexster/wiki/RexPro-Messages
+ */
 class Message
 {
+    /**
+     * The JSON serializer identifier for RexPro
+     */
     const SERIALIZER_TYPE_JSON    = 1;
+
+    /**
+     * The MsgPack serializer identifier for RexPro
+     */
     const SERIALIZER_TYPE_MSGPACK = 0;
 
+    /**
+     * The current RexPro version
+     */
     private protocolVersion = 1 {
         set, get
     };
+
+    /**
+     * The type of serializer used in messages to Rexster
+     */
     private serializerType  = self::SERIALIZER_TYPE_JSON {
         get
     };
+
+    /**
+     * RexPro messages require these empty bits
+     */
     private reserved         = [0,0,0,0] {
         set, get
     };
+
+    /**
+     * ID of message type
+     */
     private message_type;
+
+    /**
+     * Length of the serialized message body
+     */
     private messageSize {
         set
     };
+
+    /**
+     * The main contents of the message
+     */
     private messageBody {
         set
     };
+
+    /**
+     * The serialized message body (what is actually communicated to/from Rexster)
+     */
     private messageBodySerialized {
         set
     };
+
+    /**
+     * A mapping of Rexster Message type ids to classes
+     */
     private message_types    = [
         1: "Rexpro\\Message\\Body\\Request\\Session",
         2: "Rexpro\\Message\\Body\\Response\\Session",
@@ -31,6 +93,10 @@ class Message
         5: "Rexpro\\Message\\Body\\Response\\Script",
         0: "Rexpro\\Message\\Body\\Response\\Error"
     ];
+
+    /**
+     * All possible Rexster serializer types
+     */
     private serializer_types = [
         self::SERIALIZER_TYPE_JSON,
         self::SERIALIZER_TYPE_MSGPACK
@@ -38,6 +104,9 @@ class Message
 
     public function setSerializerType(int type) -> <\Rexpro\Message>
     {
+        /**
+         * Validate serializer type
+         */
         if (in_array(type, this->serializer_types)) {
             let this->serializerType = type;
 
@@ -49,16 +118,25 @@ class Message
 
     public function getMessageSize() -> int
     {
+        /**
+         * Return messageSize member variable if set
+         */
         if !empty this->messageSize
         {
             return this->messageSize;
         }
 
+        /**
+         * Determine Message size from the serialized body
+         */
         if (!empty this->messageBodySerialized)
         {
             let this->messageSize = mb_strlen(this->messageBodySerialized, "ISO-8859-1");
         } elseif (!empty this->messageBody)
         {
+            /**
+             * We need the length of the serialized body
+             */
             this->serializeBody();
             let this->messageSize = mb_strlen(this->messageBodySerialized, "ISO-8859-1");
         }
@@ -68,6 +146,9 @@ class Message
 
     public function setMessageType(type) -> <\Rexpro\Message>
     {
+        /**
+         * Validate the message type
+         */
         if (array_key_exists(type, this->message_types)) {
             let this->message_type = type;
 
@@ -80,10 +161,16 @@ class Message
 
     public function getMessageType()
     {
+        /**
+         * If message type member variable is valid, return it.
+         */
         if (is_int(this->message_type)) {
             return this->message_type;
         }
 
+        /**
+         * If there is a message body, get the type from it.
+         */
         if (!empty this->messageBody)
         {
             let this->message_type = this->getMessageKeyFromType(this->messageBody);
